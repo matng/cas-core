@@ -11,6 +11,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	href="<c:url value='/bootstrap/assets/css/bootstrap-select.min.css'/>" />
 <link rel="stylesheet"
 	href="<c:url value='/bootstrap/assets/css/fileinput.min.css'/>" />
+<link rel="stylesheet"
+	href="<c:url value='/bootstrap/assets/css/jquery.gritter.css'/>" />
 
 <div class="row">
 	<div class="col-xs-12">
@@ -19,68 +21,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<!-- #section:plugins/fuelux.treeview -->
 		<div class="row">
 			<div class="col-sm-2">
-				<div class="widget-box widget-color-blue2">
+				<div class="widget-box widget-color-blue">
 					<div class="widget-header">
-						<c:if test="${type == 2}">
-					       	<shiro:hasPermission name="flash:c">
-					       	<button id="addNodeBtn" class="btn btn-white btn-info btn-round">
-								<i class="ace-icon fa fa-floppy-o bigger-120 blue"></i> 
-								<fmt:message key="add" />
-							</button>
-							</shiro:hasPermission>
-							<shiro:hasPermission name="flash:u">
-							<button id="editNodeBtn" class="btn btn-white btn-default btn-round">
-								<i class="ace-icon fa fa-pencil-square-o red2"></i> 编辑
-							</button>
-							</shiro:hasPermission>
-							<shiro:hasPermission name="flash:d">
-							<button id="delNodeBtn" class="btn btn-white btn-default btn-round">
-								<i class="ace-icon fa fa-trash-o bigger-120 orange"></i> <fmt:message key="delete" />
-							</button>
-							</shiro:hasPermission>
-						</c:if>
-						
-						<c:if test="${type == 3}">
-					       	<shiro:hasPermission name="video:c">
-					       	<button id="addNodeBtn" class="btn btn-white btn-info btn-round">
-								<i class="ace-icon fa fa-floppy-o bigger-120 blue"></i> 
-								<fmt:message key="add" />
-							</button>
-							</shiro:hasPermission>
-							<shiro:hasPermission name="video:u">
-							<button id="editNodeBtn" class="btn btn-white btn-default btn-round">
-								<i class="ace-icon fa fa-pencil-square-o red2"></i> 编辑
-							</button>
-							</shiro:hasPermission>
-							<shiro:hasPermission name="video:d">
-							<button id="delNodeBtn" class="btn btn-white btn-default btn-round">
-								<i class="ace-icon fa fa-trash-o bigger-120 orange"></i> <fmt:message key="delete" />
-							</button>
-							</shiro:hasPermission>
-						</c:if>
-						
-						<c:if test="${type == 4}">
-					       	<shiro:hasPermission name="file:c">
-					       	<button id="addNodeBtn" class="btn btn-white btn-info btn-round">
-								<i class="ace-icon fa fa-floppy-o bigger-120 blue"></i> 
-								<fmt:message key="add" />
-							</button>
-							</shiro:hasPermission>
-							<shiro:hasPermission name="file:u">
-							<button id="editNodeBtn" class="btn btn-white btn-default btn-round">
-								<i class="ace-icon fa fa-pencil-square-o red2"></i> 编辑
-							</button>
-							</shiro:hasPermission>
-							<shiro:hasPermission name="file:d">
-							<button id="delNodeBtn" class="btn btn-white btn-default btn-round">
-								<i class="ace-icon fa fa-trash-o bigger-120 orange"></i> <fmt:message key="delete" />
-							</button>
-							</shiro:hasPermission>
-						</c:if>
 					</div>
-
 					<div class="widget-body">
-						<div class="widget-main padding-8">
+						<div class="widget-main padding-10">
 							<ul id="tree1" class="tree tree-folder-select" role="tree"></ul>
 						</div>
 					</div>
@@ -89,50 +34,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			
 			<div class="col-sm-10">
 				<div class="table-header">
-						<c:if test="${type == 2}">
-					       	<shiro:hasPermission name="flash:c">
-					       	<button id="upLoadBtn" class="btn btn-white btn-info btn-round">
+						<c:if test="${type == 1}">
+					       	<button id="storageBtn" class="btn btn-white btn-info btn-round">
 									<i class="ace-icon fa fa-floppy-o bigger-120 blue"></i> 
-									<fmt:message key="uploadfile" />
+									入库
 							</button>
-							</shiro:hasPermission>
-							<shiro:hasPermission name="flash:d">
 							<button id="removeBtn" class="btn btn-white btn-default btn-round">
 								<i class="ace-icon fa fa-trash-o bigger-120 orange"></i> <fmt:message key="remove" />
 							</button>
-							</shiro:hasPermission>
 						</c:if>
 						
-						<c:if test="${type == 3}">
-					       	<shiro:hasPermission name="video:c">
-					       	<button id="upLoadBtn" class="btn btn-white btn-info btn-round">
-									<i class="ace-icon fa fa-floppy-o bigger-120 blue"></i> 
-									<fmt:message key="uploadfile" />
+						<c:if test="${type == 0}">
+					       	<button id="outStorageBtn" class="btn btn-white btn-info btn-round">
+									<i class="ace-icon fa fa-floppy-o bigger-120 blue"></i>
+									出库
 							</button>
-							</shiro:hasPermission>
-							<shiro:hasPermission name="video:d">
 							<button id="removeBtn" class="btn btn-white btn-default btn-round">
 								<i class="ace-icon fa fa-trash-o bigger-120 orange"></i> <fmt:message key="remove" />
 							</button>
-							</shiro:hasPermission>
 						</c:if>
-						
-						<c:if test="${type == 4}">
-					       	<shiro:hasPermission name="file:c">
-							<button id="upLoadBtn" class="btn btn-white btn-info btn-round">
-									<i class="ace-icon fa fa-floppy-o bigger-120 blue"></i> 
-									<fmt:message key="uploadfile" />
-							</button>
-							</shiro:hasPermission>
-							<shiro:hasPermission name="file:d">
-							<button id="removeBtn" class="btn btn-white btn-default btn-round">
-								<i class="ace-icon fa fa-trash-o bigger-120 orange"></i> <fmt:message key="remove" />
-							</button>
-							</shiro:hasPermission>
-						</c:if>							
-
-		
-
 				</div>
 				
 				<div id="show-data-table">
@@ -143,9 +63,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<th class="center"><label class="position-relative">
 										<input type="checkbox" class="ace" /> <span class="lbl"></span>
 								</label></th>
-								<th><fmt:message key="restype" /></th>
-								<th><fmt:message key="fileurl" /></th>
-								<th><fmt:message key="operate" /></th>
+								<th>物资名称</th>
+								<th>类别</th>
+								<th>单价</th>
+								<th>数量</th>
+								<th>合计</th>
+								<th>录入时间</th>
+								<th>修改时间</th>
+								<th>描述</th>
+								<th>操作</th>
 							</tr>
 						</thead>
 						<tbody></tbody>
@@ -154,84 +80,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 		</div>
 
-		<div id="modal-table-resource-group" class="modal fade" tabindex="-1">		
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header no-padding">
-						<div class="table-header">
-							<button type="button" class="close" data-dismiss="modal"
-								aria-hidden="true">
-								<span class="white">&times;</span>
-							</button>
-							<span id="modal-title-resource-group">新增</span>
-						</div>
-					</div>
 
-					<div id="modal-body" class="modal-body no-padding">
-					<form id="MyResourceGroupForm" method="post" class="form-horizontal" role="form">
-						<div class="form-group">
-							<div class="col-sm-9">
-								<input type="text" id="groupid" name="id" class="hidden" />
-								<input type="text" id="parentgroupid" name="parentgroupid" class="hidden" />
-								<input type="text" id="grouptype" name="grouptype" class="hidden" />
-							</div>
-						</div>
-						
-						<div class="form-group">
-							<label class="col-sm-3 control-label no-padding-right"
-								for="groupname">编组名称</label>
-							<div class="col-sm-9">
-								<div class="clearfix">
-								<input type="text" id="groupname" name="groupname" class="col-xs-10 col-sm-5"/>
-								</div>
-							</div>
-						</div>
-						
-						<div class="space-4"></div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label no-padding-right" 
-							for="groupdesc">编组描述</label>
-							<div class="col-sm-9">
-								<div class="clearfix">
-								<input type="text" id="groupdesc" name="groupdesc" class="col-xs-10 col-sm-5" />
-								</div>
-							</div>
-						</div>
-						
-						<div class="space-4"></div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label no-padding-right" 
-							for="menuUrl">菜单地址</label>
-							<div class="col-sm-9">
-								<div class="clearfix">
-								<input type="text" id="menuUrl" name="menuUrl" class="col-xs-10 col-sm-5" />
-								</div>
-							</div>
-						</div>
-
-						</form>
-					</div>
-
-					<div class="modal-footer no-margin-top">
-
-						<button class="btn btn-sm" data-dismiss="modal">
-							<i class="ace-icon fa fa-times"></i> <fmt:message key="cancel" />
-						</button>
-
-						<button id="saveGroupBtn" class="btn btn-sm btn-primary">
-							<i class="ace-icon fa fa-check"></i><fmt:message key="confirm" />
-						</button>
-					</div>
-				</div>
-				<!-- /.modal-content -->
-			</div>
-			<!-- /.modal-dialog -->
-
-
-		</div>
-
-
-		<div id="modal-table" class="modal fade" tabindex="-1">		
+		<div id="modal-storage-form" class="modal fade" tabindex="-1">		
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header no-padding">
@@ -245,15 +95,83 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</div>
 
 					<div id="modal-body" class="modal-body no-padding">
-						<form id="MyResourceForm" method="post" class="form-horizontal" enctype="multipart/form-data">
+						<form id="inForm" method="post" class="form-horizontal" role="form">
 							<div class="form-group">
-								<div class="col-sm-9" style="width:100%">
-									<div id="fileinput-div">
-										<input id="upLoadInput" type="file" class="file" name="file" multiple data-preview-file-type="any" data-upload-url="<c:url value='/res/upload'/>">
+								<div class="col-sm-9">
+									<input type="text" id="id" name="id"
+										class="hidden" />
+								</div>
+							</div>
+													
+							
+							<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right"
+									for="rolename">名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称</label>
+								<div class="col-sm-9">
+									<div class="clearfix">
+										<input type="text" id="inResName" name="resName" readonly="readonly"
+										class="col-xs-10 col-sm-5" />
+									</div>
+								</div>
+							</div>
+	
+							<div class="space-4"></div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right"
+									for="rolename">单&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;价</label>
+								<div class="col-sm-9">
+									<div class="clearfix">
+										<input type="text" id="inUnitPrice" name="unitPrice" onkeyup="countTotal()"
+											class="col-xs-10 col-sm-5" />
+									</div>
+								</div>
+							</div>
+							
+							<div class="space-4"></div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right"
+									for="rolename">数&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;量</label>
+								<div class="col-sm-9">
+									<div class="clearfix">
+										<input type="text" id="inNumber" name="number" onkeyup="countTotal()"
+											class="col-xs-10 col-sm-5" />
+									</div>
+								</div>
+							</div>
+							
+							<div class="space-4"></div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right"
+									for="rolename">合&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;计</label>
+								<div class="col-sm-9">
+									<div class="clearfix">
+										<input type="text" id="inTotalPrice" name="totalPrice" readonly="readonly"
+											class="col-xs-10 col-sm-5" />
+									</div>
+								</div>
+							</div>
+							
+							<div class="space-4"></div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right"
+									for="rolename">描&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;述</label>
+								<div class="col-sm-9">
+									<div class="clearfix">
+										<input type="text" id="inInfo" name="info"
+											class="col-xs-10 col-sm-5" />
 									</div>
 								</div>
 							</div>
 						</form>
+					</div>
+					
+					<div class="modal-footer no-margin-top">
+						<button class="btn btn-sm" data-dismiss="modal">
+							<i class="ace-icon fa fa-times"></i> 取消
+						</button>
+						<button id="inSaveBtn" class="btn btn-sm btn-primary">
+							<i class="ace-icon fa fa-check"></i> 确定
+						</button>
 					</div>
 				</div>
 				<!-- /.modal-content -->
@@ -270,57 +188,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript">
 $(function(){
 	$('.selectpicker').selectpicker();
-	$.ajax({
-		type:'POST',
-		url: "/hxdsite-web/module/queryAll",
-		cache:false,
-		dataType: 'json',
-		success: function(data){
-			var option = new Option("选择模块",-1);
-			$('#moduleSelect').append(option);
-			//$('#moduleSelect').append('<option value=-1>选择模块</option>');
-			for(var i = 0;i < data.length; i++) {
-				var item = new Option(data[i].modulename,data[i].id);
-				$('#moduleSelect').append(item);
-				//$('#moduleSelect').append('<option value="' + data[i].id + '">' + data[i].modulename + '</option>');
-            }
-			$('#moduleSelect').selectpicker('val', -1);
-			$('#moduleSelect').selectpicker('refresh');
-		}
-	});
 });
 
-
-var validator = $("#MyResourceGroupForm").validate({
+var validator = $("#inForm").validate({
 	errorElement: 'div',
 	errorClass: 'help-block',
 	focusInvalid: false,
 	ignore: "",
 	rules: {
-		groupname: {
+		unitPrice: {
 			required: true,
-			maxlength:200
+			number:true
 		},
-		groupdesc: {
+		number: {
 			required: true,
-			maxlength:600
-		},
-		menuUrl:{
-			maxlength:200
+			number:true
 		}
 	},
 
 	messages: {
-		groupname: {
+		unitPrice: {
 			required: "不能为空.",
-			maxlength:"分组名称不能超过200个字符！"
+			number: "非法字符，请输入数字."
 		},
-		groupdesc: {
+		number: {
 			required: "不能为空.",
-			maxlength:"分组描述不能超过600个字符！"
-		},
-		menuUrl:{
-			maxlength:"菜单地址不能超过200个字符!"
+			number: "非法字符，请输入数字."
 		}
 	},
 	highlight: function (e) {
@@ -342,216 +235,55 @@ var validator = $("#MyResourceGroupForm").validate({
 
 });
 
-function ajaxgo(url) {
-	
-}
 
-var globalGroupID = null;
+var globalResID = null;
 
 //编辑
-$("#upLoadBtn").click(upLoader);
-function upLoader() {
+$("#storageBtn").click(storage);
+function storage() {
+	
 	var items = $('#tree1').tree('selectedItems');
-	var json = JSON.stringify(items);
-	////alert(json);
-
-	var selectedItem = null;
-	var groupid = null;
-	for(var i in items) {
-		selectedItem = items[i];
+	var item = items[0];
+	if(item != null && item.type == 'item'){
+		globalResID = item.id;
+		$('#inResName').val(item.text);
+		$('#modal-storage-form').modal('show');
+	}else{
+		errMsgBox("请选择物资类型!");
 	}
 	
-	if (selectedItem == null)
-	{
-		errMsgBox("请选择一个分组!");
-	}
-	else
-	{
-		var type = ${type};
-		var myTypes = [];
-		switch(type)
-		{
-		case 2:
-			myTypes= ['flash'];break;
-		case 3:
-			myTypes= ['video','audio'];break;
-		case 4:
-			myTypes= null;break;
-			default:
-				break;
-		
-		}
-		var json = {"restype":type,"groupid":selectedItem.id,"bigpicurl":selectedItem.groupname};
-		$('#fileinput-div').html('');
-		$('#fileinput-div').append('<input id="upLoadInput" type="file" class="file" name="file" multiple data-preview-file-type="any" data-upload-url="<c:url value='/res/upload'/>">');
-		$("#upLoadInput").fileinput({
-			uploadExtraData:{"extraData":JSON.stringify(json)},
-			allowedFileTypes:myTypes,
-			ajaxSettings:{
-				'success':mysuccess
-			}
-		});
-		$('#modal-table').modal('show');
-	}
 }
 
-function mysuccess()
-{
-	$('#modal-table').modal('hide');
-	oTable.fnDraw();
+//计算合计
+function countTotal(){
+	var price = $('#inUnitPrice').val()==null || $('#inUnitPrice').val()==''?'1':$('#inUnitPrice').val();
+	var number =  $('#inNumber').val()==null && $('#inNumber').val()==''?'1':$('#inNumber').val();
+	var total = parseFloat(price)*parseFloat(number);
+	$('#inTotalPrice').val(total.toFixed(2));
 }
 
-
-//编辑
-$("#delNodeBtn").click(deleteSelectObj);
-function deleteSelectObj() {
-
-	var items = $('#tree1').tree('selectedItems');
-	var json = JSON.stringify(items);
-	////alert(json);
-	
-	var id = '';
-	for(var i in items) {
-		var item = items[i];
-		id = item.id;
-	}
-	
-	if (id != '')
-	{
-		bootbox.confirm("确定删除吗? ", function(result) {
-			if(result) {
-				var url = "<c:url value='/res/deleteResourceGroup'/>";
-				var json = {"id":id};
-				
-				fnAjaxPost(url,JSON.stringify(json),function(res){
-					var obj = JSON.parse(JSON.stringify(res));		
-					if (obj.success) {
-						msgBox(obj.success);
-						refreshTreeItem();
-				
-					} else {
-						errMsgBox(obj.error);
-					}
-				});				
-			}
-		});
-	}
-	else
-	{
-		errMsgBox('请选择一个编组结点!');
-	}
-
-}
-
-//编辑
-$("#editNodeBtn").click(updateSelectObj);
-function updateSelectObj() {
-	validator.resetForm();
-	resetFrom();
-	var items = $('#tree1').tree('selectedItems');
-	var json = JSON.stringify(items);
-	////alert(json);
-	
-	var item = null;
-	for(var i in items) {
-		item = items[i];
-		//pid = item.id;
-	}
-
-	//只有根节点才需要选择模块
-	if (item != null)
-	{
-		//alert(item.menuUrl);
-		$('#groupid').val(item.id);
-		$('#parentgroupid').val(item.parentgroupid);
-		$('#groupdesc').val(item.groupdesc);
-		$('#menuUrl').val(item.menuUrl);
-		$('#groupname').val(item.groupname);
-		$('#grouptype').val(item.grouptype);
-	}
-	else
-	{
-		errMsgBox('请选择一个菜单结点!');
+//入库
+$("#inSaveBtn").click(inSaveData);
+function inSaveData() {
+	if(!$('#inForm').valid()) {
 		return;
 	}
-	
-	$("#modal-title-resource-group").html("编辑!");
-	
-	$('#modal-table-resource-group').modal('show');
-}
-
-//添加节点
-$("#addNodeBtn").click(addGroupNode);
-function addGroupNode() {
-	validator.resetForm();
-	resetFrom();
-	//alert('@@@@@@123');
-	$("#modal-title-resource-group").html("新增!");
-	$('#modal-table-resource-group').modal('show');
-	$('#groupid').val(null);
-	var groupType = ${type};
-	$('#grouptype').val(groupType);
-	//清空列表项
-	//*/
-	
-	var items = $('#tree1').tree('selectedItems');
-	var json = JSON.stringify(items);
-	////alert(json);
-	
-	var item = null;
-	for(var i in items) {
-		item = items[i];
-		//pid = item.id;
-	}
-
-	//只有根节点才需要选择模块
-	if (item != null)
-	{
-		$('#parentgroupid').val(item.id);
-		
-	}
-	else
-	{
-		$('#parentgroupid').val(0);
-	}
-
-}
-
-
-function refreshTreeItem() {
-
-	window.location.reload();
-}
-
-//保存
-$("#saveGroupBtn").click(saveGroupData);
-function saveGroupData() {
-	if(!$('#MyResourceGroupForm').valid()) {
-		return;
-	}
-
-	
-	var groupid = $('#groupid').val();
 	var pid = $('#parentgroupid').val();
-	var formData = $("#MyResourceGroupForm").serializeJSON();
-	formData.id = groupid;
-	formData.parentgroupid = pid;
+	var formData = $("#inForm").serializeJSON();
+	formData.restype = globalResID;
+	formData.groupid = 1;
 
 	var json = JSON.stringify(formData);
 	
-	//json.push({"moduleid":moduleId});
-	
-	//json.push({"templateid":templateId});
-	//alert(json);
-	var url = "<c:url value='/res/saveResourceGroup'/>";		
+	var url = "<c:url value='/res/insert'/>";		
 	
 	fnAjaxPost(url,json,function(res){
 		var obj = JSON.parse(JSON.stringify(res));		
 		if (obj.success) {
 			msgBox(obj.success);
-			$("#modal-table-resource-group").modal('hide');
+			$("#modal-storage-form").modal('hide');
+			oTable.fnDraw();
 			resetFrom();
-			refreshTreeItem();	
 		} else {
 			errMsgBox(obj.error);
 		}
@@ -559,6 +291,30 @@ function saveGroupData() {
 	
 }
 
+//更新编辑
+function updateObj(json) {
+	$("#modal-title").html("编辑!");
+	var obj = JSON.parse(decodeJson(json));
+	$("#rolename").val(obj.rolename);
+	$("#roledesc").val(obj.roledesc);
+	var isenable = document.getElementsByName("isenable");
+	for(var i=0;i<isenable.length;i++)
+		{
+			if(isenable.item(i).value==obj.isenable)
+				{
+				isenable.item(i).checked=true;
+				}
+		}
+}
+function delRow(ids) {
+	bootbox.confirm("确定删除吗? ", function(result) {
+		if(result) {
+			var idList = new Array();
+			idList.push(ids);
+			deleteObj(idList);	
+		}
+	});
+}
 //删除方法
 function deleteObj(ids){	
 	var url = "<c:url value='/res/delete'/>";
@@ -620,8 +376,14 @@ function delOne(ids) {
 			var url = "<c:url value='/res/listJson'/>";
 			var colJson = [
 							  {"mDataProp": "id", "sClass":"center", "bSortable": false,"bSearchable": false, "mRender": chkRender },
-							  {"mDataProp": "restype", "sClass":"center","bSortable":true, "mRender": typeRender},
-							  {"mDataProp": "fileurl", "sClass":"center","bSortable": false,"bSearchable": false },
+							  {"mDataProp": "resName", "sClass":"center","bSortable":true,"bSearchable": true},
+							  {"mDataProp": "groupid", "sClass":"center","bSortable": false,"bSearchable": false,"mRender": typeRender },
+							  {"mDataProp": "unitPrice", "sClass":"center","bSortable": false,"bSearchable": false },
+							  {"mDataProp": "number", "sClass":"center","bSortable": false,"bSearchable": false },
+							  {"mDataProp": "totalPrice", "sClass":"center","bSortable": false,"bSearchable": false },
+							  {"mDataProp": "createTime", "sClass":"center","bSortable": false,"bSearchable": false },
+							  {"mDataProp": "updateTime", "sClass":"center","bSortable": false,"bSearchable": false},
+							  {"mDataProp": "info", "sClass":"center","bSortable": false,"bSearchable": false },
 							  {"mDataProp": "id", "sClass": "left","bSearchable": false,"bSortable": false,"mRender": opRender}
 							];		
 			//初始化 datatables
@@ -635,70 +397,35 @@ function delOne(ids) {
 				    html += '</label>';
 				return html;
 			}
-			
-			function typeRender(data,type,full) {
-				var info = null;
-				switch(data)
-				{
-					case 1:
-						info = "图片";break;
-					case 2:
-						info = "flash";break;
-					case 3:
-						info = "影音";break;
-					case 4:
-						info = "附件";break;
-					default: info = "数据出错";
-				}
-				return info;
+
+			function typeRender(data,type,full){
+				var html = '';
+				if (data == '0') {
+					html = '<span class="label label-sm label-success">出库</span>';
+				} else {
+					html = '<span class="label label-sm label-warning">入库</span>';
+				}			
+				return html;
+				
 			}
-			
 			
 			function opRender(data,type,full) {			
-				var html = "<div class=\'hidden-sm hidden-xs action-buttons\'>"
-					<c:if test="${type == 2}">					
-						<shiro:hasPermission name="flash:d">
-						+"<a class=\'red\' href=\'javascript:void(0);\' onclick=delOne(\'"+data+"\');>"
-						+"<i class=\'ace-icon fa fa-trash-o bigger-130\'></i></a>"
-						</shiro:hasPermission>
-						
-					</c:if>
-					
-					<c:if test="${type == 3}">						
-						<shiro:hasPermission name="video:d">
-						+"<a class=\'red\' href=\'javascript:void(0);\' onclick=delOne(\'"+data+"\');>"
-						+"<i class=\'ace-icon fa fa-trash-o bigger-130\'></i></a>"
-						</shiro:hasPermission>
-						
-					</c:if>
-					
-					<c:if test="${type == 4}">						
-						<shiro:hasPermission name="file:d">
-						+"<a class=\'red\' href=\'javascript:void(0);\' onclick=delOne(\'"+data+"\');>"
-						+"<i class=\'ace-icon fa fa-trash-o bigger-130\'></i></a>"
-						</shiro:hasPermission>
-					</c:if>
-					+"</div>";
-				return html;		
+				var html = "<div class=\'hidden-sm hidden-xs action-buttons\'>"+
+					"<a class=\'green\' href=\'javascript:void(0);\' onclick=updateObj(\'"+encodeJson(JSON.stringify(full))+"\') data-toggle=\'modal\' data-target=\'#modal-table\'>"+
+					"<i class=\'ace-icon fa fa-pencil bigger-130\'></i></a>"+
+					"<a class=\'red\' href=\'javascript:void(0);\' onclick=delRow(\'"+data+"\');>"+
+					"<i class=\'ace-icon fa fa-trash-o bigger-130\'></i></a>"+
+					"</div>";
+					return html;
 			}
 			
-			function statusRender(data,type,full) {
-				var html = '';
-				if (data == '1') {
-					html = '<span class="label label-sm label-success">生效</span>';
-				} else {
-					html = '<span class="label label-sm label-warning">禁用</span>';
-				}			
-				return html;		
-			}
 			//回调函数
 			function callAjaxFunc( sSource, aoData, fnCallback ) {
-				var type = ${type};
+				var groupid = ${type};
 				aoData.push({"name": "sortCol", "value": getDataTablesColumns(colJson) }); 
 			    var url = sSource;
-			    var json = { 'aoData': JSON.stringify(aoData),"restype": type, "groupid":globalGroupID};
+			    var json = { 'aoData': JSON.stringify(aoData),"restype": globalResID, "groupid":groupid};
 			    fnAjaxGet(url,json,function(resp) {
-			    	//alert(JSON.stringify(resp));
 					fnCallback(resp);
 				});	
 			}
@@ -718,11 +445,9 @@ function delOne(ids) {
 				var grouptype = ${type};
 				var json = {'id':parent_id,'grouptype':grouptype};		
 				
-				////alert(JSON.stringify(json));
 				
 				if(parent_id !== null) {
 					fnAjaxPost(url,JSON.stringify(json),function(resp){
-						//alert(JSON.stringify(resp));
 						callback({ data: resp })
 					});	
 				}			
@@ -751,7 +476,6 @@ function delOne(ids) {
 			$('#tree1').on('selected.fu.tree', function(e) {
 				var items = $('#tree1').tree('selectedItems');
 				var json = JSON.stringify(items);
-				////alert(json);
 				
 				var item = null;
 				for(var i in items) {
@@ -763,9 +487,8 @@ function delOne(ids) {
 				{
 					if (selectedId != item.id)
 					{
-						//alert(item.id);
 						selectedId = item.id;
-						globalGroupID = item.id;
+						globalResID = item.id;
 						oTable.fnDraw();
 						//refreshDataTable(selectedId);
 						
@@ -773,7 +496,6 @@ function delOne(ids) {
 				}
 				else
 				{
-					//alert('123');
 				}
 				
 			});
@@ -781,19 +503,16 @@ function delOne(ids) {
 			$('#tree1').on('deselected.fu.tree', function(e) {
 				var items = $('#tree1').tree('selectedItems');
 				var json = JSON.stringify(items);
-				////alert(json);
 				
 				var item = null;
 				for(var i in items) {
 					item = items[i];
-					//pid = item.id;
 				}
 				
 				if (item == null)
 				{
-					globalGroupID = null;
+					globalResID = null;
 					oTable.fnDraw();
-					//refreshDataTable(null);
 					selectedId = null;
 				}
 				

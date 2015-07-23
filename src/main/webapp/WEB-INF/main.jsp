@@ -231,9 +231,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</shiro:hasPermission>
 							<shiro:hasPermission name="flash:r">
 								<li class="">
-									<a href="#res/flash">
+									<a href="#res/instorge">
 										<i class="menu-icon fa fa-caret-right"></i>
-										FLASH
+										入库管理
 									</a>
 	
 									<b class="arrow"></b>
@@ -241,20 +241,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</shiro:hasPermission>
 							<shiro:hasPermission name="video:r">
 	                            <li class="">
-									<a href="#res/video">
+									<a href="#res/outstorge">
 										<i class="menu-icon fa fa-caret-right"></i>
-										影音
-									</a>
-	
-									<b class="arrow"></b>
-								</li>
-							</shiro:hasPermission>
-							
-							<shiro:hasPermission name="file:r">
-	                            <li class="">
-									<a href="#res/file">
-										<i class="menu-icon fa fa-caret-right"></i>
-										文件
+										出库管理
 									</a>
 	
 									<b class="arrow"></b>
